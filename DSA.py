@@ -1,14 +1,14 @@
 
-# ⚠️ Selection Sort
+#⚠️ Insertion Sort
 
-arr = [1,5,7,3,2]
+arr = [10, 12, 5, 6, 2,4]
 
-n = len(arr)
-for i in range(n -1):
-    min=i
-    for j in range(i + 1, n):
-        if arr[j] < arr[min]:
-            min = j
-    arr[min], arr[i] = arr[i], arr[min]
+for i in range(1, len(arr)):
+    curr = arr[i]
+    j = i - 1               # Sorted array beginning
+    while j >= 0 and curr < arr[j]:
+        arr[j+1] = arr[j]
+        j -= 1
+    arr[j+1] = curr
 
 print(arr)
