@@ -1,69 +1,41 @@
-def fibo(n: int, list = []):
-    if n <= 1:
-        return n
-    else:
-        list.append(n)
-        print(list)
-        return fibo(n - 1) + fibo(n - 2)
-    
-# for i in range(int(input("Enter your input: "))): print(fibo(i))
-print(fibo(4)) 
+# ⚠️ Two pointer
 
-# ⚠️ Sum of natural numbers
+list = [int(input()) for i in range(5)]
+target = int(input("Enter target value (a + b = )"))
+l = 0
+r = len(list) - 1
 
-def SumOfNaturalNum(n):
-    if n == 1:
-        return 1
-    else:
-        return n + SumOfNaturalNum(n - 1)
-
-print(SumOfNaturalNum(5))
-
-# ⚠️ Sum Of Series -> n + (n-2) + (n-4) + ....
-
-def SumOfSeries(n) :
-    if n == 0 or n == 1:
-        return n
-    else:
-        return n + SumOfSeries(n - 2)
-
-print(SumOfSeries(10))
-
-# ⚠️ Exponential 
-
-def power(n, m):
-    if m == 0:
-        return 1
-    else:
-        return n * power(n, m - 1)
-    
-print(power(2, 4))
-
-# ⚠️ Greatest Common Divisor
-
-def GCD(n1, n2 ):
-    if n2 == 0:
-        return n1
-    return GCD(n2, n1 % n2)
-print(GCD(20, 28))
-
-# using loop 
-
-n1, n2 = 20, 30
-min_val = min(n1, n2)
-
-for _ in range(min_val):
-    if n2 == 0:
-        print(n1)
+while l < r :
+    if list[l] + list[r] == target:
+        print(l, r)
         break
-    n1, n2 = n2, (n1 % n2)
-    min_val = min(n1, n2) 
-
-# ⚠️ Reverse of string
-
-def revStr(s):
-    if len(s) == 0:
-        return ''
-    return revStr(s[1:]) + s[0]
+    elif list[l] + list[r] < target:
+        l += 1 
+    elif list[l] + list[r] > target:
+        r -= 1 
     
-print(revStr("Hello"))
+else:
+    print("No combination found..")
+
+
+'''for _ in range(len(list)): #Using For loop
+    if list[l] + list[r] == target:
+        print(l, r)
+        break
+    elif list[l] + list[r] < target: 
+        l += 1'''
+    
+
+
+# ⚠️ Two pointer palindrome
+
+def palindrome(s):
+    l = 0
+    r = len(s) - 1
+    while l < r :
+        if s[l] != s[r]:
+            return False
+        l += 1
+        r -= 1
+    return True
+print(palindrome('abaca'))
