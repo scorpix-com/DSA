@@ -1,14 +1,39 @@
 
-#⚠️ Insertion Sort
+#  ⚠️ Merge sort
 
-arr = [10, 12, 5, 6, 2,4]
 
-for i in range(1, len(arr)):
-    curr = arr[i]
-    j = i - 1               # Sorted array beginning
-    while j >= 0 and curr < arr[j]:
-        arr[j+1] = arr[j]
-        j -= 1
-    arr[j+1] = curr
+def MergeSort(array):
+    if len(array) > 1:
+        middle = len(array) // 2
+        left = array[: middle]
+        right = array[middle:]
 
-print(arr)
+        MergeSort(left)
+        MergeSort(right)
+
+        lp = 0
+        rp = 0
+        fp = 0
+        while lp < len(left) and rp < len(right):
+            if left[lp] < right[rp]:
+                array[fp] = left[lp]
+                lp += 1
+            else:
+                array[rp] = right[rp]
+                rp += 1
+            fp += 1
+        
+        while lp < len(left):
+            array[fp] = left[lp]
+            lp += 1
+            fp += 1
+        while lp < len(right):
+            array[fp] = right[rp]
+            rp += 1
+            fp += 1
+
+array = [3, 2, 1, 4]
+print("Before sorting: ",array)
+MergeSort(array)
+
+print("After sorting: ",array)
