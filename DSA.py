@@ -1,39 +1,42 @@
+#  ⚠️ Stack using List
 
-#  ⚠️ Merge sort
+def push(data):
+    stack.append(data)
+
+def _pop():
+    return stack.pop()
+
+def top():
+    return stack[-1]
+
+def search(data):
+    for val in stack: 
+        if val == data: return "Found"
+        else: return "Not Found"
+
+stack = [1,2,3]
+
+print(stack)
+print("Pushing: 5", push(5))
+print("Pushing: 7", push(7))
+print(stack)
+print("Popping: ", _pop())
+print(stack)
+print("Top: ", top())
+print("Search: 5", search(5))
 
 
-def MergeSort(array):
-    if len(array) > 1:
-        middle = len(array) // 2
-        left = array[: middle]
-        right = array[middle:]
+# Stack using Deque
 
-        MergeSort(left)
-        MergeSort(right)
+from collections import deque
 
-        lp = 0
-        rp = 0
-        fp = 0
-        while lp < len(left) and rp < len(right):
-            if left[lp] < right[rp]:
-                array[fp] = left[lp]
-                lp += 1
-            else:
-                array[rp] = right[rp]
-                rp += 1
-            fp += 1
-        
-        while lp < len(left):
-            array[fp] = left[lp]
-            lp += 1
-            fp += 1
-        while lp < len(right):
-            array[fp] = right[rp]
-            rp += 1
-            fp += 1
+stack = deque([4,5,6])
 
-array = [3, 2, 1, 4]
-print("Before sorting: ",array)
-MergeSort(array)
+print("---Using deque")
 
-print("After sorting: ",array)
+print(f"Push: 8 {push(8)}")
+print(f"Push: 9 {push(9)}")
+print(stack)
+print(f"Pop:  {_pop()}")
+print(f"Top:  {top()}")
+print(f"Search:  {search(10)}")
