@@ -1,42 +1,61 @@
-#  ⚠️ Stack using List
+# ⚠️ Queue
 
-def push(data):
-    stack.append(data)
+queue = []
 
-def _pop():
-    return stack.pop()
+# Enqueue
 
-def top():
-    return stack[-1]
+queue.append(1)
+queue.append(2.0)
+queue.append("Hello")
+queue.append('A')
 
-def search(data):
-    for val in stack: 
-        if val == data: return "Found"
-        else: return "Not Found"
+print(queue)
 
-stack = [1,2,3]
+# Dequeue
 
-print(stack)
-print("Pushing: 5", push(5))
-print("Pushing: 7", push(7))
-print(stack)
-print("Popping: ", _pop())
-print(stack)
-print("Top: ", top())
-print("Search: 5", search(5))
+popped1 = queue.pop(0)
+popped2 = queue.pop(0)
 
+print(popped1,'\n',popped2)
 
-# Stack using Deque
+# Front
 
-from collections import deque
+print(queue[0])
 
-stack = deque([4,5,6])
+# Empty
 
-print("---Using deque")
+print(len(queue) == 0)
 
-print(f"Push: 8 {push(8)}")
-print(f"Push: 9 {push(9)}")
-print(stack)
-print(f"Pop:  {_pop()}")
-print(f"Top:  {top()}")
-print(f"Search:  {search(10)}")
+''' Using Queue Library'''
+
+from queue import Queue
+
+q = Queue()
+
+q.put(5)
+q.put(2.0)
+q.put("Hello")
+
+print(q)
+
+# Dequeue
+
+popped = q.get()
+popped1 = q.get()
+
+print(popped, popped1)
+
+# Front
+
+print(q.queue[0])
+
+# Empty
+print(q.empty())
+
+# Full
+
+print(q.full())
+
+'''We can also use
+    ---from collections import dequeue
+    to use queue operations, store and access them.'''
