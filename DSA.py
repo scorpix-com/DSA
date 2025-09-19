@@ -1,84 +1,52 @@
-# ⚠️ Linked List
-
-'''Created Linked list with basics of class and objects'''
-class Node:
-    def __init__(self, data):
-        self.data = data
-        self.next = None
-
-Head = Node(10)
-Node1 = Node(20)
-Node2 = Node("Hi")
-
-Head.next = Node1
-Node1.next = Node2
-
-curr = Head
-while curr is not None:
-    print(curr.data)
-    curr = curr.next
-
-print(Head.data, Head.next)
-# ---------------------------------------------------------
-
-'''This is main part of Linked List'''
-
-
-class LinkedList:
+class HashTable:
     def __init__(self):
-        self.head = None
-    def add(self, data) :
-        newNode = Node(data)
-        if self.head is None:
-            self.head = newNode
-        else:
-            cur = self.head
-            while (cur.next is not None):
-                cur = cur.next
-            cur.next = newNode
-    def display(self):
-        if (self.head is not None):
-            cur = self.head
-            while (cur is not None):
-                print(cur.data, end= " ")
-                cur = cur.next
-            print()
-        else: print("Node is empty.")
+        self.MAX = 10
+        self.arr = [[] for i in range(self.MAX)]
     
-    def remove(self, target):
-        if self.head is None: print("It has no values in it.")
-        else:
-            if self.head.data == target:
-                self.head = self.head.next
-            else:
-                cur = self.head
+    def get_hash_value(self, key):
+        h = 0
+        for data in key:
+            h += ord(data)
+        
+        return h%10
 
-                while cur.next is not None and cur.next.data != target:
-                    cur = cur.next
-                if cur.next is not None:
-                    cur.next = cur.next.next
-    def search(self, target):
-        if self.head is not None:
-            cur = self.head
-            if self.head.data == target:
-                print("Found")
-                return 0
-            while (cur is not None):
-                if cur.data == target:
-                    print("Found")
-                    return None
-                cur = cur.next
-            else: print("Not found")
-        else: print("Linked list is empty.")
+    def __setitem__(self, key, value):
+        h = self.get_hash_value(key)
+        found = False
+        for idx, element in enumerate(self.arr[h]):
+            if len(element) == 2 and element[0] == key:
+                self.arr[h][idx] = (key, value)
+                found = True
+                break
+        if not found:
+            self.arr[h].append((key, value))
+
+    def __getitem__(self, key):
+        h = self.get_hash_value(key)
+        for element in self.arr[h]:
+            if element[0] == key:
+                return element[1]
+    
+    def __delitem__(self, key):
+        h = self.get_hash_value(key)
+
+        for idx, element in enumerate(self.arr[h]):
+            if element[0] == key:
+                del self.arr[h][idx]
+        
 
 
-list = LinkedList()
-list.add(10)           
-list.add(15)           
-list.add("Hi")     
-list.add(11)     
-list.display()      
-list.remove(15)
-list.remove("Hi")
-list.display()
-list.search(15) # End
+ht = HashTable()
+print(ht.get_hash_value("march 9"))
+ht["march 6"] = 120
+ht["march 17"] = 345
+ht["march 2"] = 270
+ht["december 10"] = 156
+
+print(ht["march 6"])
+print(ht.arr)
+
+del ht["march 6"]
+del ht["december 10"]
+
+print(ht.arr)
